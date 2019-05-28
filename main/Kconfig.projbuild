@@ -1,0 +1,27 @@
+menu "Custom configuration"
+
+	config SSID
+		string "WIFI access point name (SSID)"
+		default "myaccesspoint"
+		help
+			Enter the name of the WIFI access point
+
+	config SSID_PASSWORD
+		string "WIFI password"
+		default "12345678"
+		help
+			Enter ssid password
+
+
+	config NABTO_ID
+		string "Nabto ID"
+		default "xxxxxxxx.yyyyy.appmyproduct.com"
+		help
+			Enter the Nabto id - you can get one from appmyproduct.com
+		
+	config NABTO_KEY
+		string "Nabto key - 32 hex chars"
+		default "01234567890123456789012345678912"
+		help
+			Enter the 32 char hex key that is for the device id
+endmenu
