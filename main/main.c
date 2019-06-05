@@ -33,11 +33,7 @@
 static EventGroupHandle_t wifi_event_group;
 const int CONNECTED_BIT = BIT0;
 
-#ifndef CAMERA_WIRING
-#define CAMERA_WIRING ESP_EYE
-#endif
-
-#if CAMERA_WIRING==ESP_EYE
+#ifdef CONFIG_ESP_EYE
 
 // ESP-EYE wiring
 #define CAM_PIN_PWDN    -1 //power down is not used
@@ -58,7 +54,7 @@ const int CONNECTED_BIT = BIT0;
 #define CAM_PIN_HREF    27
 #define CAM_PIN_PCLK    25
 
-#elif CAMERA_WRING==ESP_TINKER
+#elif defined CONFIG_ESP_TINKER
 
 // Ai Thinker CAM 32 wiring 
 #define CAM_PIN_PWDN    -1 //power down is not used
