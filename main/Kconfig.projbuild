@@ -1,4 +1,4 @@
-menu "Custom configuration"
+menu "Camera configuration"
 
 	config SSID
 		string "WIFI access point name (SSID)"
@@ -24,4 +24,18 @@ menu "Custom configuration"
 		default "01234567890123456789012345678912"
 		help
 			Enter the 32 char hex key that is for the device id
+
+	choice CAMERA_WIRING
+		prompt "Setup correct wiring of camera"
+		default ESP-EYE
+		help
+			The different ESP32 camera modules uses different wiring for the camera.
+			Please supply the correct one, or adjust the camera_config in main.c
+		config ESP_EYE
+			bool "ESP-EYE"
+		config ESP_TINKER
+			bool "Seedstudios/AI.Tinker"
+	endchoice
+
+
 endmenu

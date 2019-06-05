@@ -5,5 +5,7 @@
 
 PROJECT_NAME := esp32_nabto
 
+EXTRA_CFLAGS := -Wno-maybe-uninitialized
+
 include $(IDF_PATH)/make/project.mk
 

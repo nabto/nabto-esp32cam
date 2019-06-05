@@ -33,7 +33,34 @@
 static EventGroupHandle_t wifi_event_group;
 const int CONNECTED_BIT = BIT0;
 
-//WROVER-KIT PIN Map
+#ifndef CAMERA_WIRING
+#define CAMERA_WIRING ESP_EYE
+#endif
+
+#if CAMERA_WIRING==ESP_EYE
+
+// ESP-EYE wiring
+#define CAM_PIN_PWDN    -1 //power down is not used
+#define CAM_PIN_RESET   -1 //software reset will be performed
+#define CAM_PIN_XCLK    4
+#define CAM_PIN_SIOD    18
+#define CAM_PIN_SIOC    23
+
+#define CAM_PIN_D7      36
+#define CAM_PIN_D6      37
+#define CAM_PIN_D5      38
+#define CAM_PIN_D4      39
+#define CAM_PIN_D3      35
+#define CAM_PIN_D2      14
+#define CAM_PIN_D1      13
+#define CAM_PIN_D0      34
+#define CAM_PIN_VSYNC    5
+#define CAM_PIN_HREF    27
+#define CAM_PIN_PCLK    25
+
+#elif CAMERA_WRING==ESP_TINKER
+
+// Ai Thinker CAM 32 wiring 
 #define CAM_PIN_PWDN    -1 //power down is not used
 #define CAM_PIN_RESET   32 //software reset will be performed
 #define CAM_PIN_XCLK    0
@@ -51,6 +78,12 @@ const int CONNECTED_BIT = BIT0;
 #define CAM_PIN_VSYNC   25
 #define CAM_PIN_HREF    23
 #define CAM_PIN_PCLK    22
+
+#else
+#error "Not defined - this should not happed!"
+#endif
+
+
 
 static camera_config_t camera_config = {
     .pin_pwdn  = CAM_PIN_PWDN,
@@ -79,7 +112,7 @@ static camera_config_t camera_config = {
     .pixel_format = PIXFORMAT_JPEG,//YUV422,GRAYSCALE,RGB565,JPEG
     .frame_size = FRAMESIZE_VGA,//QQVGA-QXGA Do not use sizes above QVGA when not JPEG
 
-    .jpeg_quality = 20, //0-63 lower number means higher quality
+    .jpeg_quality = 10, //0-63 lower number means higher quality
     .fb_count = 2 //if more than one, i2s runs in continuous mode. Use only with JPEG
 };
 
@@ -392,15 +425,37 @@ void main_task(void *pvParameter)
 void app_main()
 {
 
+  NABTO_LOG_INFO(("Nabto ESP32 demo starting up!!!"));
+
+  NABTO_LOG_INFO(("Initializing nvs flash"));
+    
   // Initialize NVS
   esp_err_t ret = nvs_flash_init();
   if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
+      NABTO_LOG_INFO(("Erasing flash"));
       ESP_ERROR_CHECK(nvs_flash_erase());
       ret = nvs_flash_init();
   }
   ESP_ERROR_CHECK( ret );
 
   //initialize the camera
+  NABTO_LOG_INFO(("Initializing camera"));
+  
+#if CAMERA_WIRING==ESP_EYE
+    /* IO13, IO14 is designed for JTAG by default,
+     * to use it as generalized input,
+     * firstly declair it as pullup input */
+    gpio_config_t conf;
+    conf.mode = GPIO_MODE_INPUT;
+    conf.pull_up_en = GPIO_PULLUP_ENABLE;
+    conf.pull_down_en = GPIO_PULLDOWN_DISABLE;
+    conf.intr_type = GPIO_INTR_DISABLE;
+    conf.pin_bit_mask = 1LL << 13;
+    gpio_config(&conf);
+    conf.pin_bit_mask = 1LL << 14;
+    gpio_config(&conf);
+#endif
+
   ret = esp_camera_init(&camera_config);
   if (ret != ESP_OK) {
       NABTO_LOG_ERROR(("Camera Init Failed"));
@@ -409,7 +464,7 @@ void app_main()
   // disable stdout buffering
   setvbuf(stdout, NULL, _IONBF, 0);
  
-  NABTO_LOG_INFO(("Nabto ESP32 demo starting up!!!"));
+
 
   /*
   NABTO_LOG_INFO(("Testing AES adapter"));

@@ -964,9 +964,12 @@ esp_err_t camera_probe(const camera_config_t* config, camera_model_t* out_camera
         conf.mode = GPIO_MODE_OUTPUT;
         gpio_config(&conf);
 
+        // ESP32 Ai Tinker board needs reset reversed (don't know why)
         gpio_set_level(config->pin_reset, 1);
+        //gpio_set_level(config->pin_reset, 0);
         vTaskDelay(10 / portTICK_PERIOD_MS);
         gpio_set_level(config->pin_reset, 0);
+        //gpio_set_level(config->pin_reset, 1);
         vTaskDelay(10 / portTICK_PERIOD_MS);
 #if (CONFIG_OV2640_SUPPORT && !CONFIG_OV3660_SUPPORT)
     } else {
