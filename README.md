@@ -154,7 +154,8 @@ Download the Android or iPhone app from app store
 
 ## Pair the video app with the wifi module
 
-Setup your phone to be connected to the same WIFI network as the device. This is ultra important since the app and the device will do a broadcast discovery to find eachother. The app will create an anonomous PKI cert and send this to the device on the local network which is considered "safe" (ie. don't pair on public network). After this the device will now accept that the app can remotely connect.
+Setup your phone to be connected to the same WIFI network as the device. This is ultra important since the app and the device will do a broadcast discovery to find eachother. The app will create an anonomous PKI cert and send the fingerprint of the key (like SSH) to the device on the local network which is considered "safe" (ie. don't pair on public network). The device add this fingerprint to the access control list and after this the device will now accept that the app can remotely connect. Read more about [Nabto access control lists and pairing here|https://www.nabto.com/pairing-and-access-control-part-1-intro-and-device/].
+
 
 <p align="center">
 <img border="1" src="docs/esp32cam-overview.png">
