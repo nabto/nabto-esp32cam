@@ -139,7 +139,11 @@ Look for the "connected!" telling that the device knows how to connect to your W
 To test the camera you can try to access:
 http://<adress of camera>:8081/
 
-Which will 
+Which will show something like this:
+
+<p align="center">
+<img border="1" src="docs/ESP-EYE-browser.png">
+</p>
 
 
 ## Download the AMP video app
