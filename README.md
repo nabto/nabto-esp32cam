@@ -149,11 +149,24 @@ Which will show something like this:
 ## Download the AMP video app
 
 Download the Android or iPhone app from app store
-https://play.google.com/store/apps/details?id=com.appmyproduct.video
-https://itunes.apple.com/lc/app/appmyproduct-video-client/id1276975254
-
+* https://play.google.com/store/apps/details?id=com.appmyproduct.video
+* https://itunes.apple.com/lc/app/appmyproduct-video-client/id1276975254
 
 ## Pair the video app with the wifi module
 
+Setup your phone to be connected to the same WIFI network as the device. This is ultra important since the app and the device will do a broadcast discovery to find eachother. The app will create an anonomous PKI cert and send this to the device on the local network which is considered "safe" (ie. don't pair on public network). After this the device will now accept that the app can remotely connect.
+
+<p align="center">
+<img border="1" src="docs/esp32cam-overview.png">
+<img border="1" src="docs/esp32cam-discover.png">
+</p>
 
 ## Connect and view video
+
+Now you should be able to connect to the camera when you click on the camera logo.
+
+<p align="center">
+<img border="1" src="docs/esp32cam-overviewpaired.png">
+<img border="1" src="docs/esp32cam-viewcamera.png">
+</p>
+
