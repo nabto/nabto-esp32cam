@@ -6,6 +6,9 @@ Also it uses the espressif esp32-cam library with slight modification (we could 
 
 The video is MJPEG and the module can cope to remotely stream (encode to mjpeg and encrypt and integrity check) a VGA feed at around 10 frames per second.
 
+You should also read the related blog article:
+https://www.nabto.com/esp32/
+
 # The structure
 
 The structure of the project is as follows
