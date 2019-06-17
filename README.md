@@ -67,7 +67,7 @@ http://esp-idf.readthedocs.io/en/latest/get-started/index.html
 
 
 ```
-git clone --recursive https://github.com/nabto/unabto-esp32.git
+git clone --recursive https://github.com/nabto/nabto-esp32cam.git
 ```
 
 ## Step 3: Make menuconfig
