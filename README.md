@@ -61,7 +61,8 @@ unabto_application.c contains the application (inside the application_event func
 
 Follow the setup of the ESP-IDF toolchain setup
 
-http://esp-idf.readthedocs.io/en/latest/get-started/index.html
+http://esp-idf.readthedocs.io/en/stable/get-started/index.html
+(WARNING!!! It is important to use the "stable" release not latests.. Issues with fcntl has been detected as of late june 2019)
 
 ## Step 2: Clone the repository
 
