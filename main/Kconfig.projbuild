@@ -35,6 +35,8 @@ menu "Camera configuration"
 			bool "ESP-EYE"
 		config ESP_TINKER
 			bool "Seedstudios/AI.Tinker"
+		config M5CAMERA_A
+			bool "M5Stack Camera A"	
 	endchoice
 
 

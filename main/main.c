@@ -75,10 +75,30 @@ const int CONNECTED_BIT = BIT0;
 #define CAM_PIN_HREF    23
 #define CAM_PIN_PCLK    22
 
+#elif CONFIG_M5CAMERA_A
+#define CAM_PIN_PWDN    -1 //power down is not used
+#define CAM_PIN_RESET   15 //software reset will be performed
+#define CAM_PIN_XCLK    27
+#define CAM_PIN_SIOD    25
+#define CAM_PIN_SIOC    23
+
+#define CAM_PIN_D7      19
+#define CAM_PIN_D6      36
+#define CAM_PIN_D5      18
+#define CAM_PIN_D4      39
+#define CAM_PIN_D3      5
+#define CAM_PIN_D2      34
+#define CAM_PIN_D1      35
+#define CAM_PIN_D0      32
+#define CAM_PIN_VSYNC   22
+#define CAM_PIN_HREF    26
+#define CAM_PIN_PCLK    21
+
 #else
 #error "Not defined - this should not happed!"
 #endif
 
+#define CAM_XCLK_FREQ   20000000
 
 
 static camera_config_t camera_config = {
@@ -101,7 +121,7 @@ static camera_config_t camera_config = {
     .pin_pclk = CAM_PIN_PCLK,
 
     //XCLK 20MHz or 10MHz for OV2640 double FPS (Experimental)
-    .xclk_freq_hz = 20000000,
+    .xclk_freq_hz = CAM_XCLK_FREQ,
     .ledc_timer = LEDC_TIMER_0,
     .ledc_channel = LEDC_CHANNEL_0,
 
