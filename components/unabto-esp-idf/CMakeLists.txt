@@ -12,6 +12,6 @@ set(esp-idf-nabto-src	"./dns_adapter.c"
 			"./crypto/unabto_sha256.c")
 
 idf_component_register(SRCS ${esp-idf-nabto-src} ${unabto_core_src}
-                       INCLUDE_DIRS "." "../../../unabto/src"
+                       INCLUDE_DIRS "." "../../unabto/src"
                        REQUIRES mbedtls)
 
